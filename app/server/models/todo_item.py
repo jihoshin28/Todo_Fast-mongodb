@@ -5,13 +5,13 @@ from pydantic import BaseModel, EmailStr, Field
 class TodoItemSchema(BaseModel):
     item: str = Field(...)
     title: str = Field(...)
-    # class Config:
-    #     schema_extra = {
-    #         "example": {
-    #             "item": "Item 1",
-    #             "title": "Title 1"
-    #         }
-    #     }
+    class Config:
+        schema_extra = {
+            "example": {
+                "item": "Item 1",
+                "title": "Title 1"
+            }
+        }
 
 class UpdateTodoItemModel(BaseModel):
     item: Optional[str]
