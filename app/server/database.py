@@ -43,7 +43,7 @@ async def retrieve_todo_item(id: str) -> dict:
     if todo_item:
         return todo_item_helper(todo_item)
 
-async def update_todo_items(id: str, data: dict):
+async def update_todo_item(id: str, data: dict):
     if len(data) < 1:
         return False
     todo_item = await todo_item_collection.find_one("_id": ObjectId(id))

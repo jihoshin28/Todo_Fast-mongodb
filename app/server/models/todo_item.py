@@ -6,7 +6,7 @@ class TodoItemSchema(BaseModel):
     item: str = Field(...)
     title: str = Field(...)
 
-class UpdateItemMode(BaseModel):
+class UpdateTodoItemModel(BaseModel):
     item: Optional[str]
     title: Optional[str]
 
