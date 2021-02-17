@@ -1,5 +1,5 @@
 import motor.motor_asyncio
-from bson.objectid import ObjectId
+from bson import ObjectId
 
 MONGO_DETAILS = "mongodb://localhost:27017"
 
@@ -11,11 +11,12 @@ database = client.todo_items
 #     "_users": client.users
 # }
 
-todo_item_collection = database.get_collection("todo_items_collection")
+todo_item_collection = database.todo_items_collection
 # users_collection = database.users.get_collection("users_collection")
 
 def todo_item_helper(todo_item) -> dict:
     return{
+        "id": str(todo_item["_id"]),
         "item": todo_item["item"],
         "title": todo_item["title"]
     }
@@ -28,7 +29,7 @@ def user_helper(user) -> dict:
     }
 
 async def retrieve_todo_items():
-    todo_items: []
+    todo_items = []
     async for todo_item in todo_item_collection.find():
         todo_items.append(todo_item_helper(todo_item))
     return todo_items

@@ -6,7 +6,8 @@ from ..database import (
     delete_todo_item,
     retrieve_todo_item,
     retrieve_todo_items,
-    update_todo_item
+    update_todo_item,
+    user_helper
 )
 
 from ..models.todo_item import (
@@ -20,14 +21,15 @@ from ..models.todo_item import (
 
 router = APIRouter()
 
-@router.post('/', response_description = "To do data added into the database")
-async def add_todo_item(todo_item_input: TodoItemSchema = Body(...)):
+@router.post("/", response_description = "To do data added into the database")
+async def add_todo_item_data(todo_item_input: TodoItemSchema = Body(...)):
     todo_item = jsonable_encoder(todo_item_input)
     new_todo_item = await add_todo_item(todo_item)
+    # new_todo_item = await add_todo_item(todo_item)
     return ResponseModel(new_todo_item, "To do item added successfully")
 
 @router.get("/", response_description="To do Items retrieved")
-async def get_todo_items():
+async def get_todo_items_data():
     todo_items = await retrieve_todo_items()
     if todo_items:
         return ResponseModel(todo_items, "To do Item data retrieved successfully")
@@ -56,13 +58,13 @@ async def update_todo_item_data(id: str, req: UpdateTodoItemModel = Body(...)):
         "There was an error updating the to do item data.",
     )
 
-@router.delete("/{id}", response_description="To do item data deleted from the database")
-async def delete_todo_item_data(id: str):
-    deleted_todo_item = await delete_todo_item(id)
-    if deleted_todo_item:
+@router.delete("/{id}", response_description="Student data deleted from the database")
+async def delete_student_data(id: str):
+    deleted_student = await delete_student(id)
+    if deleted_student:
         return ResponseModel(
-            "To do item with ID: {} removed".format(id), "To do item deleted successfully"
+            "Student with ID: {} removed".format(id), "Student deleted successfully"
         )
     return ErrorResponseModel(
-        "An error occurred", 404, "To do item with id {0} doesn't exist".format(id)
+        "An error occurred", 404, "Student with id {0} doesn't exist".format(id)
     )

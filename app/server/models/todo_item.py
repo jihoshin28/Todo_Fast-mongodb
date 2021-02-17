@@ -1,10 +1,11 @@
 from typing import Optional
-
-from pydantic import BaseModel, EmailStr, Field
+from bson import ObjectId
+from pydantic import BaseModel, Field
 
 class TodoItemSchema(BaseModel):
-    item: str = Field(...)
-    title: str = Field(...)
+    _id: ObjectId
+    item: str
+    title: str 
     class Config:
         schema_extra = {
             "example": {
