@@ -15,6 +15,7 @@ class TodoItemSchema(BaseModel):
         }
 
 class UpdateTodoItemModel(BaseModel):
+    _id: Optional[str]
     item: Optional[str]
     title: Optional[str]
     class Config:

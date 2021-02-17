@@ -49,7 +49,7 @@ async def update_todo_item(id: str, data: dict):
         return False
     todo_item = await todo_item_collection.find_one({"_id": ObjectId(id)})
     if todo_item:
-        updated_todo_item = await todo_items_collection.update_one(
+        updated_todo_item = await todo_item_collection.update_one(
             {"_id": ObjectId(id)}, {"$set": data}
         )
         if updated_todo_item:
@@ -59,5 +59,5 @@ async def update_todo_item(id: str, data: dict):
 async def delete_todo_item(id: str):
     todo_item = await todo_item_collection.find_one({"_id": ObjectId(id)})
     if todo_item:
-        await student_collection.delete_one({"_id": ObjectId(id)})
+        await todo_item_collection.delete_one({"_id": ObjectId(id)})
         return True
